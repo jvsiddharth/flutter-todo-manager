@@ -7,6 +7,23 @@
 - flutter pub get
 - flutter run
 
+*** API Docs
+-{url}/docs
+
+-POST
+-/api/tasks
+-GET
+-/api/tasks
+-GET
+-/api/tasks/{id}
+-PATCH
+-/api/tasks/{id}
+-DELETE
+-/api/tasks/{id}
+
+*** Deployed url
+-https://flutter-todo-manager.onrender.com/docs
+
 ***Screenshots
 *Main Dashboard
 -https://ibb.co/6kCWdf2
