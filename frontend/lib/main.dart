@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'features/tasks/view/task_dashboard.dart';
+import 'core/theme/theme_provider.dart';
 
 void main() {
   runApp(
@@ -15,7 +16,7 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isDark = ref.watch(_darkModeProvider);
+    final isDark = ref.watch(darkModeProvider);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -33,5 +34,3 @@ class MyApp extends ConsumerWidget {
     );
   }
 }
-
-final _darkModeProvider = StateProvider<bool>((_) => false);

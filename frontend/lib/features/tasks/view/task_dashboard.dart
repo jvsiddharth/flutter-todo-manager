@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/api/api_client.dart';
 import '../provider/task_provider.dart';
 import '../model/task.dart';
+import '../../../core/theme/theme_provider.dart';
 
 class TaskDashboard extends ConsumerWidget {
   const TaskDashboard({super.key});
@@ -13,7 +14,24 @@ class TaskDashboard extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Smart Task Manager'),
+      title: const Text('Smart Task Manager'),
+      actions: [
+          Consumer(
+            builder: (context, ref, _) {
+              final isDark = ref.watch(darkModeProvider);
+
+              return IconButton(
+                tooltip: isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode',
+                icon: Icon(
+                  isDark ? Icons.light_mode : Icons.dark_mode,
+                ),
+                onPressed: () {
+                  ref.read(darkModeProvider.notifier).state = !isDark;
+                },
+              );
+            },
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -133,7 +151,7 @@ class _TaskList extends ConsumerWidget {
                         label: Text(task.priority),
                         backgroundColor:
                             task.priority == 'high'
-                                ? Colors.red.shade100
+                                ? Colors.red.shade500
                                 : task.priority == 'medium'
                                     ? Colors.orange.shade100
                                     : Colors.green.shade100,
