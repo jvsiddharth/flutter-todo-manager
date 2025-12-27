@@ -2,6 +2,7 @@ import 'dotenv/config';
 import Fastify from 'fastify';
 import swagger from '@fastify/swagger';
 import swaggerUI from '@fastify/swagger-ui';
+import sql from './config/db';
 
 const app = Fastify({ logger: true });
 
@@ -27,5 +28,17 @@ app.register(swaggerUI, {
 app.get('/health', async (request) => {
   return { status: 'ok' };
 });
+
+// db health route
+app.get('/db-health', async (request) => {
+  try {
+    await sql`SELECT 1`;
+    return { dbStatus: 'ok' };
+  } catch (error) {
+    return { dbStatus: error };
+  }
+});
+
+// Start the server
 
 app.listen({ port: Number(process.env.PORT) || 3000, host: '0.0.0.0' });
