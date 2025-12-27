@@ -4,6 +4,8 @@ import swagger from '@fastify/swagger';
 import swaggerUI from '@fastify/swagger-ui';
 import sql from './config/db';
 
+import { taskRoutes } from './modules/tasks/task.routes';
+
 const app = Fastify({ logger: true });
 
 app.register(swagger, {
@@ -39,6 +41,7 @@ app.get('/db-health', async (request) => {
   }
 });
 
-// Start the server
+app.register(taskRoutes);
 
+// Start the server
 app.listen({ port: Number(process.env.PORT) || 3000, host: '0.0.0.0' });
